@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  username      String          @unique
+  password      String          // Hashed password
+  fullName      String?         // Optional full name field
+  role          Role           @default(CASE_MANAGER)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  savedResources SavedResource[]
+}
+
+model Resource {
+  id             Int             @id @default(autoincrement())
+  name           String
+  category       String
+  status         Status          @default(AVAILABLE)
+  contactDetails Json            // Store as {"address": "...", "phone": "...", "email": "..."}
+  zipcode        String
+  notes          Json            @default("[]") // Store as [{"userId": 1, "content": "...", "timestamp": "..."}]
+  createdAt      DateTime        @default(now())
+  lastUpdated    DateTime        @updatedAt @map("last_updated")
+  savedBy        SavedResource[]
+
+  @@index([category])
+  @@index([status])
+  @@index([zipcode])
+  @@index([lastUpdated])
+}
+
+model SavedResource {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  resource   Resource @relation(fields: [resourceId], references: [id])
+  resourceId Int
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, resourceId])
+  @@index([userId])
+  @@index([resourceId])
+}
+
+enum Role {
+  CASE_MANAGER
+  ADMIN
+}
+
+enum Status {
+  AVAILABLE
+  LIMITED
+  UNAVAILABLE
+}

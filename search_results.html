@@ -1,0 +1,581 @@
+<!DOCTYPE html><html lang="en"><head>
+
+	<title>
+	Page Not Found
+	</title>
+
+	
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700:ital&amp;display=swap">
+	<link rel="stylesheet" href="/libraries/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/libraries/css/bootstrap/bootstrap3.min.css">
+
+	<link rel="stylesheet" href="/searchV2/css/footer.css">
+
+	<style type="text/css">
+		html {
+  box-sizing: border-box;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+}
+
+body {
+  margin: 0px;
+  color: rgb(53, 22, 23);
+  letter-spacing: 0.15px;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  background-color: rgb(255, 255, 255) !important;
+  height: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.error-container {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(255, 255, 255);
+}
+
+#loading-indicator {
+  display: none;
+}
+
+.error-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 114px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 58px;
+  max-width: 1440px;
+  width: 80%;
+}
+
+.image-wrapper,
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+}
+
+.image-container {
+  flex: 1 10000 300px;
+  min-width: 200px;
+}
+
+.error-message-container {
+  flex: 1 1 300px;
+  font-weight: 300;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.error-message-container > h1,
+.error-message-container > h2,
+.error-message-container > h6 {
+  margin: 0;
+}
+
+.status {
+  font-size: 6rem;
+  line-height: 1.167;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+}
+
+.details {
+  letter-spacing: -0.5px;
+  font-weight: 300;
+  font-size: 3.75rem;
+  line-height: 1.2;
+  margin-bottom: 6px !important;
+}
+
+.detailed-description {
+  letter-spacing: 0.15px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 2 !important;
+  margin-bottom: 28px !important;
+}
+
+.steps-list > h6 {
+  margin: 0;
+}
+
+.next-steps {
+  letter-spacing: 0.15px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-top: 6px !important;
+}
+
+.subtitle1 {
+  letter-spacing: 0.15px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.subtitle2 {
+  letter-spacing: 0.1px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.57;
+}
+
+.immediate-assistance {
+  margin-top: 54px;
+  margin-left: 54px;
+}
+
+.immediate-assistance > h6 {
+  margin: 0;
+  letter-spacing: 0.1px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.57;
+}
+
+.immediate-assistance > h6.support-team {
+  margin: 0;
+  letter-spacing: 0.15px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.homepage-button-container {
+  margin-top: 28px;
+  padding-left: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(53, 22, 23);
+}
+
+.homepage-button {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  margin: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.46px;
+  font-family:
+    Source Sans Pro,
+    Helvetica,
+    Arial,
+    sans-serif;
+  line-height: 1.75;
+  min-width: 64px;
+  padding: 5px 15px;
+  border-radius: 4px;
+  -webkit-transition:
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition:
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border: 1px solid rgba(0, 128, 128, 0.5);
+  color: #008080;
+  text-transform: none;
+}
+
+.homepage-button-arrow {
+  display: inherit;
+  color: #008080;
+  margin-right: -4px;
+  margin-left: 8px;
+  width: 1em;
+  height: 1em;
+  font-weight: 600;
+  font-size: 1em;
+  letter-spacing: 0.46px;
+  text-transform: uppercase;
+  font-family:
+    Source Sans Pro,
+    Helvetica,
+    Arial,
+    sans-serif;
+  line-height: 1.75;
+}
+
+.homepage-button-arrow > svg {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: #008080;
+}
+
+/* Header */
+
+nav.navbar.navbar-default .navbar-nav > li > a {
+  color: #351417 !important;
+  font-weight: 600;
+}
+
+.skiplink:focus {
+  box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.24);
+  color: #351417;
+  border: 0;
+  border-radius: 8px;
+  left: 16px;
+}
+
+.tagline {
+  color: #351417;
+}
+
+nav.navbar.navbar-default {
+  border: none;
+  border-bottom: 2px solid #00acaa;
+  box-shadow: none;
+  height: 50px;
+  font-size: 14px;
+  background-color: #ece9de;
+}
+
+.nav.ul {
+  font-size: 14px;
+}
+
+.navbar-right {
+  float: right !important;
+  margin-right: -15px;
+}
+
+.container-fluid {
+  margin: 0 auto;
+  max-width: 1690px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.skiplink {
+  color: #666;
+  left: -10000px;
+  padding: 1em;
+  position: absolute;
+  z-index: 1000;
+}
+
+.ab-container {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.primary-lockup {
+  float: left;
+  max-height: 22px;
+}
+
+.ab.primary-lockup {
+  margin-top: -14px;
+  max-height: 50px;
+}
+
+.category-nav-menu-item a:focus-visible {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+footer {
+  background-color: #f9f8f5 !important;
+  border-top: 1px solid #e7e7e7;
+  padding: 8px 10px 0;
+  margin-top: 100px;
+  margin-bottom: 0px;
+  letter-spacing: normal;
+}
+
+footer.navbar {
+  z-index: auto;
+  background-color: #f9f8f5 !important;
+  padding-bottom: 10px;
+  padding-top: 8px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+}
+
+@media only screen and (min-width: 768px) {
+  footer .container-fluid {
+    padding-left: 20px;
+    padding-right: 15px;
+  }
+}
+
+footer .navbar-toggle {
+  margin-right: 0;
+  margin-top: 0;
+}
+
+#footer-navigation .nav {
+  float: right;
+  margin-right: 0;
+  line-height: 20px;
+}
+
+#footer-navigation li a {
+  display: inline-block;
+  padding: 4px 8px;
+}
+
+#footer-navigation li:last-of-type a {
+  padding-right: 0;
+}
+
+#footer-navigation li a:hover {
+  background-color: transparent;
+}
+
+@media only screen and (max-width: 767px) {
+  #footer-navigation .nav {
+    float: none;
+  }
+
+  #footer-navigation .nav > li {
+    display: inline;
+  }
+
+  #footer-navigation li a {
+    font-size: 14px;
+    padding-right: 14px;
+  }
+
+  #copyright {
+    float: none;
+    margin-left: -7px;
+    margin-top: 1em !important;
+    text-align: left;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  #footer-navigation li:after {
+    color: #333;
+    content: "";
+    display: inline-block;
+  }
+
+  #footer-navigation li:last-of-type:after {
+    content: none;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  #copyright {
+    margin-bottom: 0;
+    padding-bottom: 5px;
+  }
+}
+
+.wl-footer-image {
+  height: 31px;
+}
+
+.wl-footer-content {
+  color: #666;
+  font-size: 12px;
+  margin-top: -8px;
+  text-align: right;
+}
+
+@media only screen and (max-width: 991px) {
+  .wl-footer-content {
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+	</style>
+
+	<style type="text/css">
+		nav.navbar.navbar-default {
+			border-bottom: 2px solid #008080;
+		}
+	</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+
+	<button onclick="window.location.href='#page-content'" class="skiplink">Skip to content</button>
+
+	<div class="container-fluid">
+
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">
+				
+					<img class="ab primary-lockup" src="/searchV2/css/images/findhelp_logo_nopad.png" alt="findhelp.org Home">
+					<span class="tagline visible-lg-block">| The Social Care Network</span>
+				
+			</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right" role="none">
+				<li role="none">
+					<a href="https://auntbertha.atlassian.net/servicedesk/customer/portals" rel="noopener" target="_blank" role="link">
+						<i class="fa fa-external-link" style="padding-right: 5px"></i>
+						<span data-translate="support" aria-label="Support (opens in a new window)">Support</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+</nav>
+
+<div class="content_wrapper">
+
+	<div class="error-container">
+		<div class="error-wrapper">
+
+			<div class="image-container">
+				<div class="image-wrapper">
+					 <img src="/images/errors/404.jpg" width="662" height="497" alt="Error">
+				</div>
+			</div>
+
+			<div class="error-message-container">
+
+				<h1 class="status">
+				404
+				</h1>
+
+				<h2 class="details">
+				Page Not Found
+				</h2>
+
+				<h6 class="detailed-description">
+				Oops! It looks like we couldn't find the page you're searching for.
+				</h6>
+
+				<h6 class="next-steps">What you can do:</h6>
+
+				<ul class="steps-list">
+				
+	<h6 class="subtitle1">
+		<strong>Check the URL:</strong>
+		Please make sure you've entered the correct web address. Typos can happen to anyone!
+	</h6>
+
+	<h6 class="subtitle1">
+		<strong>Explore Other Features:</strong>
+		Return to the Home Page to discover more about our social care platform and the services we offer.
+	</h6>
+
+				</ul>
+
+				<div class="homepage-button-container MuiBox-root css-0">
+					<a href="/">
+						<button class="homepage-button" tabindex="0" type="button">
+							Homepage
+							<span class="homepage-button-arrow">
+								<svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="EastIcon">
+									<path d="m15 5-1.41 1.41L18.17 11H2v2h16.17l-4.59 4.59L15 19l7-7-7-7z"></path>
+								</svg>
+							</span>
+							<span class="MuiTouchRipple-root css-w0pj6f"></span>
+						</button>
+					</a>
+				</div>
+
+			</div> <!-- Error message container -->
+
+		</div> <!-- Error wrapper -->
+
+		<div class="immediate-assistance">
+		  <h6 variant="subtitle2">Need immediate assistance?</h6>
+		  <h6 variant="subtitle1" class="support-team">
+			<a href="mailto:support@findhelp.com?subject=Error">
+				Contact our support team
+			</a>
+		  </h6>
+		</div> <!-- Immediate assistance -->
+
+	  </div> <!-- Error container -->
+
+	<script src="https://ml08c58wlc70.statuspage.io/embed/script.js"></script>
+
+</div>
+
+<footer class="navbar navbar-default" role="contentinfo">
+	<div class="container-fluid">
+		<div id="footer-navigation">
+			<ul class="nav navbar-nav">
+				<li>
+					<a class="activity-log" data-activity-type="enter-site-map-footer" href="/site_map" data-translate="Site Map">Site Map</a>
+				</li>
+
+				<li>
+					<a class="activity-log" data-activity-type="enter_suggest_program-footer" href="/find_a_program" data-translate="Suggest Program">Suggest Program</a>
+				</li>
+				<li>
+					<a class="activity-log" data-activity-type="enter_claim_flow-footer" data-translate="Claim Programs" href="/claims" id="claim-programs-button">Claim Programs</a>
+				</li>
+
+				<li>
+					<a class="activity-log" data-activity-type="enter_accessibility-footer" href="/legal/accessibility">Accessibility</a>
+				</li>
+				<li>
+					<a class="activity-log" rel="noopener" data-activity-type="enter_terms-footer" href="/legal/terms" target="_blank">Terms</a>
+				</li>
+				<li>
+					<a class="activity-log" rel="noopener" data-activity-type="enter_privacy-footer" href="/legal/privacy" target="_blank">Privacy</a>
+				</li>
+			</ul>
+			<div id="copyright">© 2011-2025. <a href="https://company.findhelp.com" data-translate="Powered by findhelp">Powered by findhelp</a>.</div>
+		</div>
+	</div>
+</footer>
+
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;929df13fe6adcf31&quot;,&quot;version&quot;:&quot;2025.3.0&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}},&quot;token&quot;:&quot;5a761f60667f451d87e7144a6edaa2ff&quot;,&quot;b&quot;:1}" crossorigin="anonymous"></script>
+
+</body></html>
