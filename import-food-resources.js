@@ -85,7 +85,7 @@ async function importResources() {
           record['Who They Serve']
         );
         
-        await prisma.resource.create({
+        try { await prisma.resource.create({
           data: {
             organization: record.Organization,
             program: record.Program,
@@ -96,7 +96,7 @@ async function importResources() {
           }
         });
         
-        console.log(`Imported: ${record.Program} - ${record.Organization}`);
+        console.log(`Imported: ${record.Program} - ${record.Organization}`); } catch(err) { console.error(`Failed to import ${record.Program} - ${record.Organization}:`, err.message); }
       }
       
       console.log("Import completed successfully!");
