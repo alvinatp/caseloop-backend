@@ -11,6 +11,8 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
@@ -26,7 +28,8 @@ model User {
 
 model Resource {
   id             Int             @id @default(autoincrement())
-  name           String
+  organization   String
+  program        String?
   category       String
   status         Status          @default(AVAILABLE)
   contactDetails Json            // Store as {"address": "...", "phone": "...", "email": "..."}
