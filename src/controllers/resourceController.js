@@ -456,4 +456,158 @@ export const unsaveResource = async (req, res) => {
     console.error('Unsave Resource Error:', error);
     res.status(500).json({ message: 'Server error unsaving resource' });
   }
+};
+
+export const importResourcesFromCSV = async (req, res) => {
+  try {
+    // Check if file was uploaded
+    if (!req.file) {
+      return res.status(400).json({
+        message: 'No CSV file was uploaded'
+      });
+    }
+
+    // Read the CSV file
+    const fs = require('fs');
+    const { parse } = require('csv-parse');
+    const path = require('path');
+    
+    const csvFilePath = req.file.path;
+    
+    // Extract zipcode from contact string
+    function extractZipcode(contactStr) {
+      if (!contactStr) return "00000";
+      const match = contactStr.match(/\b\d{5}\b/);
+      return match ? match[0] : "00000"; // Default to a general zipcode if not found
+    }
+    
+    // Extract address, phone, email, and website from contact string
+    function extractContactDetails(contactStr, services, target) {
+      if (!contactStr) contactStr = "";
+      if (!services) services = "";
+      if (!target) target = "";
+      
+      const details = {
+        address: "",
+        phone: "",
+        email: "",
+        website: "",
+        description: `${services}\n\nWho They Serve: ${target}`
+      };
+      
+      // Extract address
+      const addressMatch = contactStr.match(/Location:\s*([^,]+,\s*[^,]+,\s*[A-Z]{2}\s*\d{5})/);
+      if (addressMatch) {
+        details.address = addressMatch[1];
+      }
+      
+      // Extract phone
+      const phoneMatch = contactStr.match(/Phone:\s*([0-9-]+(\s*ext\.\s*\d+)?)/);
+      if (phoneMatch) {
+        details.phone = phoneMatch[1];
+      }
+      
+      // Extract email
+      const emailMatch = contactStr.match(/Email:?\s*([^\s]+@[^\s]+\.[^\s]+)/);
+      if (emailMatch) {
+        details.email = emailMatch[1];
+      }
+      
+      // Extract website
+      const websiteMatch = contactStr.match(/Website:\s*([^\s]+\.[^\s]+)/);
+      if (websiteMatch) {
+        details.website = websiteMatch[1];
+      }
+      
+      return details;
+    }
+    
+    // Create a readable stream for the CSV file
+    const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
+    
+    // Parse the CSV content
+    parse(fileContent, {
+      columns: true,
+      skip_empty_lines: true,
+      trim: true
+    }, async (err, records) => {
+      if (err) {
+        console.error("Error parsing CSV:", err);
+        return res.status(400).json({
+          message: 'Error parsing CSV file',
+          error: err.message
+        });
+      }
+      
+      console.log(`Found ${records.length} records in CSV file`);
+      
+      let successCount = 0;
+      let errorCount = 0;
+      const errors = [];
+      
+      try {
+        // Create each resource in the database
+        for (const record of records) {
+          try {
+            // Skip if program is numbered (likely a header or duplicate)
+            if (record.Program && /^\d+\./.test(record.Program)) {
+              record.Program = record.Program.replace(/^\d+\.\s*/, '');
+            }
+            
+            const zipcode = extractZipcode(record['Next Steps / Contact & Location'] || '');
+            const contactDetails = extractContactDetails(
+              record['Next Steps / Contact & Location'] || '',
+              record['Services Offered'] || '',
+              record['Who They Serve'] || ''
+            );
+            
+            await prisma.resource.create({
+              data: {
+                organization: record.Organization || 'Unknown Organization',
+                program: record.Program || '',
+                category: "Food",
+                status: "AVAILABLE",
+                contactDetails: contactDetails,
+                zipcode: zipcode
+              }
+            });
+            
+            console.log(`Imported: ${record.Program || 'Unknown Program'} - ${record.Organization || 'Unknown Organization'}`);
+            successCount++;
+          } catch (err) {
+            console.error(`Failed to import ${record.Program || 'Unknown Program'} - ${record.Organization || 'Unknown Organization'}:`, err.message);
+            errorCount++;
+            errors.push({
+              program: record.Program,
+              organization: record.Organization,
+              error: err.message
+            });
+          }
+        }
+        
+        // Delete the temporary file
+        fs.unlinkSync(csvFilePath);
+        
+        // Return the results
+        return res.status(200).json({
+          message: `Import completed with ${successCount} successes and ${errorCount} errors`,
+          createdCount: successCount,
+          errorCount: errorCount,
+          errors: errors.length > 0 ? errors : undefined
+        });
+      } catch (error) {
+        console.error("Error in CSV import process:", error);
+        return res.status(500).json({
+          message: 'Server error during import',
+          error: error.message
+        });
+      }
+    });
+  } catch (error) {
+    console.error("Error importing resources from CSV:", error);
+    return res.status(500).json({
+      message: 'Server error',
+      error: error.message
+    });
+  }
 }; 
