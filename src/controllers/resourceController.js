@@ -3,7 +3,7 @@ import { PrismaClient, Status } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const getResources = async (req, res) => {
-  const { category, status, zipcode, sort, page = 1, limit = 10 } = req.query;
+  const { category, status, zipcode, sort, page = 1, limit = 9 } = req.query;
 
   const where = {};
   if (category) where.category = { contains: category, mode: 'insensitive' };
@@ -127,7 +127,7 @@ export const updateResource = async (req, res) => {
 };
 
 export const searchResources = async (req, res) => {
-  const { query, page = 1, limit = 10 } = req.query;
+  const { query, page = 1, limit = 9 } = req.query;
 
   const skip = (page - 1) * limit;
 
@@ -162,25 +162,40 @@ export const searchResources = async (req, res) => {
 };
 
 export const getRecentUpdates = async (req, res) => {
-  const { since } = req.query;
+  const { since, page = 1, limit = 15 } = req.query;
+  const pageNum = parseInt(page, 10);
+  const limitNum = parseInt(limit, 10);
 
   if (!since) {
     return res.status(400).json({ message: 'The "since" query parameter (ISO8601 timestamp) is required.' });
   }
 
   try {
-    const updatedResources = await prisma.resource.findMany({
-      where: {
-        lastUpdated: {
-          gt: since,
-        },
+    const where = {
+      lastUpdated: {
+        gt: since,
       },
+    };
+
+    const skip = (pageNum - 1) * limitNum;
+
+    const updatedResources = await prisma.resource.findMany({
+      where,
       orderBy: {
         lastUpdated: 'desc',
       },
+      skip,
+      take: limitNum
     });
 
-    res.json(updatedResources);
+    const totalResources = await prisma.resource.count({ where });
+
+    res.json({
+      resources: updatedResources,
+      currentPage: pageNum,
+      totalPages: Math.ceil(totalResources / limitNum),
+      totalResources
+    });
   } catch (error) {
     console.error('Get Recent Updates Error:', error);
     res.status(500).json({ message: 'Server error retrieving recent updates' });
