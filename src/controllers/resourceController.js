@@ -59,7 +59,7 @@ export const getResourceById = async (req, res) => {
 
 export const updateResource = async (req, res) => {
   const { id } = req.params;
-  const { status, notes: newNoteContent, suggest_removal } = req.body;
+  const { status, notes: newNoteContent, suggest_removal, contactDetails } = req.body;
   const userId = req.user.id;
   const username = req.user.username;
 
@@ -77,6 +77,11 @@ export const updateResource = async (req, res) => {
       if (suggest_removal === true && !status) {
         dataToUpdate.status = Status.UNAVAILABLE;
       }
+    }
+    
+    // Handle contact details update
+    if (contactDetails) {
+      dataToUpdate.contactDetails = contactDetails;
     }
 
     let currentNotes = [];
