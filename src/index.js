@@ -29,7 +29,7 @@ app.use('/api/scraper', scraperRoutes);
 
 // Basic Root Route / Health Check
 app.get('/', (req, res) => {
-  res.send('CaseSync API is running...');
+  res.send('CaseLoop API is running...');
 });
 
 // --- Error Handling Middleware ---
